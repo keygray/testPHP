@@ -44,7 +44,8 @@
                     // biến phía trước có thể đặt tên tùy ý nhưng nên đặt giống db => đỡ nhầm
                     Session::set('adminId',$value['adminId']);
                     Session::set('adminUser',$value['adminUser']);
-                    Session::set('adminPass',$value['adminPass']);
+                    Session::set('adminName',$value['adminName']);
+                    // các biến trên có tác dụng sử dụng sau này như kiểu khi ddanwg nhập vào xin chào tên người đo
                     // nhập đúng hết rồi thì quay về trang chính
                     header('Location:index.php');
                 }
