@@ -42,5 +42,12 @@
 
             }
         }
+        public function show_category() {
+            // sắp xếp theo ID theo thứ tự desc (giảm dần)
+            $query = "SELECT * FROM  tbl_category order by catId desc";
+            // gọi function thực hiện trong database
+            $result = $this->db->select($query);
+            return $result;
+        }
     }
 ?>
