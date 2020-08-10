@@ -3,11 +3,20 @@
 <?php include '../classes/category.php';?>
 <?php
 	$cat = new category();
+	if(isset($_GET['delId'])){
+		   $id = $_GET['delId'];
+		   $deleteCat = $cat->delete_category($id);
+	}
 ?>
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>Category List</h2>
-                <div class="block">        
+                <div class="block">     
+				<?php
+                    if(isset($deleteCat)){
+                        echo $deleteCat;
+                    }
+                ?>
                     <table class="data display datatable" id="example">
 					<thead>
 						<tr>
@@ -30,7 +39,7 @@
 							<td><?php echo $i; ?></td>
 							<!-- lấy biến từ database -->
 							<td><?php echo $result['catName']; ?></td>
-							<td><a href="catedit.php?catId=<?php echo $result['catId']; ?> ">Edit</a> || <a href="?catId=<?php echo $result['catId']; ?> ">Delete</a></td>
+							<td><a href="catedit.php?catId=<?php echo $result['catId']; ?> ">Edit</a> || <a onclick="return confirm('Are you sure to delete ?')" href="?delId=<?php echo $result['catId']; ?> ">Delete</a></td>
 						</tr>
 					<?php
 							}
