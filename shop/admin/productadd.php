@@ -2,12 +2,30 @@
 <?php include 'inc/sidebar.php';?>
 <?php include '../classes/category.php';?>
 <?php include '../classes/brand.php';?>
+<?php include '../classes/product.php';?>
+<?php
+ $pd = new product();
+//  thêm submit để tránh truyền truy vấn không submit vẫn thêm đc csdl
+ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+     // từ form lấy dữ liệu 
+     
+     // kiểm tra 2 biến này bằng function trong class adminlogin
+     $insertProduct = $pd->insert_product($_POST,$_FILES) ;
+    //  $_POST khi mình lấy nhấn submit sẽ lấy tất cả dữ liệu
+    // $_FILE để upload ảnh
+}
+?>
 <div class="grid_10">
     <div class="box round first grid">
         <h2>Add New Product</h2>
-        <div class="block">     
+        <div class="block">    
+        <?php
+            if(isset($insertProduct)){
+                echo $insertProduct;
+            }
+        ?> 
          <!--Khi mà thêm hình ảnh thì bắt buộc phải có enctype  -->
-         <form action="" method="post" enctype="multipart/form-data">
+         <form action="productadd.php" method="post" enctype="multipart/form-data">
             <table class="form">
                
                 <tr>
@@ -93,7 +111,7 @@
                         <label>Product Type</label>
                     </td>
                     <td>
-                        <select id="select" name="select">
+                        <select id="select" name="type">
                             <option>Select Type</option>
                             <!-- đặt value giá trị nổi bật là 1 không nổi bật là 0 -->
                             <option value="1">Featured</option>
