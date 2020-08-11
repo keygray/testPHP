@@ -5,7 +5,7 @@
 ?>
 
 <?php
-    class category {
+    class brand {
         // khai báo biến
         private $db;
         private $fm;
@@ -15,19 +15,19 @@
             $this->fm = new Format();
         }
 
-        public function insert_category($catName) {
+        public function insert_brand($brandName) {
             // kiểm tra xem có phù hợp về chuỗi hay không (không khoảng cách...)
-            $catName = $this->fm->validation($catName);
+            $brandName = $this->fm->validation($brandName);
             // kết nối tới cơ sở dữ liệu qua biến link trong hàm database()
-            $catName = mysqli_real_escape_string($this->db->link, $catName);
+            $brandName = mysqli_real_escape_string($this->db->link, $brandName);
         
-            if(empty($catName)){
-                $alert = "<span class='error'>Category name is empty</span>";
+            if(empty($brandName)){
+                $alert = "<span class='error'>Brand name is empty</span>";
                 return $alert;
             }
             else {
                 // ghi câu truy vấn sql
-                $query = "INSERT INTO  tbl_category(catName) VALUES ('$catName')";
+                $query = "INSERT INTO  tbl_brand(brandName) VALUES ('$brandName')";
                 // gọi function thực hiện trong database
                 $result = $this->db->insert($query);
                 // nếu true insert thành công => ...
@@ -42,49 +42,49 @@
 
             }
         }
-        public function show_category() {
+        public function show_brand() {
             // sắp xếp theo ID theo thứ tự desc (giảm dần)
-            $query = "SELECT * FROM  tbl_category order by catId desc";
+            $query = "SELECT * FROM  tbl_brand order by brandId desc";
             // gọi function thực hiện trong database
             $result = $this->db->select($query);
             return $result;
         }
 
-        public function getcatbyId($id){
-            $query = "SELECT * FROM  tbl_category WHERE catId = '$id'";
+        public function getbrandbyId($id){
+            $query = "SELECT * FROM  tbl_brand WHERE brandId = '$id'";
             $result = $this->db->select($query);
             return $result;
         }
 
-        public function update_category($catName,$id){
+        public function update_brand($brandName,$id){
               // kiểm tra xem có phù hợp về chuỗi hay không (không khoảng cách...)
-            $catName = $this->fm->validation($catName);
+            $brandName = $this->fm->validation($brandName);
               // kết nối tới cơ sở dữ liệu qua biến link trong hàm database()
-            $catName = mysqli_real_escape_string($this->db->link, $catName);
+            $brandName = mysqli_real_escape_string($this->db->link, $brandName);
             $id = mysqli_real_escape_string($this->db->link, $id);
-            if(empty($catName)){
-                $alert = "<span class='error'>Category name is empty</span>";
+            if(empty($brandName)){
+                $alert = "<span class='error'>Brand name is empty</span>";
                 return $alert;
             }
             else {
                 // ghi câu truy vấn sql
-                $query = "UPDATE tbl_category SET catName= '$catName' WHERE catId = '$id'";
+                $query = "UPDATE tbl_brand SET brandName= '$brandName' WHERE brandId = '$id'";
                 // gọi function thực hiện trong database
                 $result = $this->db->update($query);
                 // nếu true insert thành công => ...
                 if($result){
-                    $alert = "<span class='success'>Insert Successfull</span>";
+                    $alert = "<span class='success'>Update Successfull</span>";
                     return $alert;
                 }
                 else {
-                    $alert = "<span class='error'>Insert Not Successfull</span>";
+                    $alert = "<span class='error'>Update Not Successfull</span>";
                     return $alert;
                 }
 
             }
         }
-        public function delete_category($id){
-            $query = "DELETE FROM tbl_category where catId = '$id'";
+        public function delete_brand($id){
+            $query = "DELETE FROM tbl_brand where brandId = '$id'";
             $result = $this->db->delete($query);
             if($result){
                 $alert = "<span class='success'>Delete Successfull</span>";

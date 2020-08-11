@@ -10,7 +10,12 @@
                         
                     </ul>
                 </li>
-				
+				<li><a class="menuitem">Brand of product</a>
+                    <ul class="submenu">
+                        <li><a href="brandadd.php">Add brand</a></li>
+                        <li><a href="brandlist.php">List brand</a></li>
+                    </ul>
+                </li>
                  <li><a class="menuitem">Update Pages</a>
                     <ul class="submenu">
                         <li><a>About Us</a></li>
