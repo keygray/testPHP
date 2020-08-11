@@ -41,8 +41,8 @@
 					<td><?php echo $result['price']?></td>
 					<!-- lấy ra phần ảnh từ folder upload dẫn đến link-->
 					<td><img src="upload/<?php echo $result['image']; ?>" width="80"></td>
-					<td><?php echo $result['catId']?></td>
-					<td><?php echo $result['brandId']?></td>
+					<td><?php echo $result['catName']?></td>
+					<td><?php echo $result['brandName']?></td>
 					<!-- text-shortten có 2 biến 1 là text 2 là số lượng kí tự muốn giới han -->
 					<td><?php echo $fm->textShorten($result['product_desc'], 50);?></td>
 					<td>
@@ -56,7 +56,7 @@
 						}
 					?>
 					</td>
-					<td><a href="">Edit</a> || <a href="">Delete</a></td>
+					<td><a href="productedit.php?productId=<?php echo $result['productId']; ?>">Edit</a> || <a onclick="return confirm('Are you sure to delete ?')" href="?delId=<?php echo $result['productId']; ?>">Delete</a></td>
 				</tr>
 				<?php
 						}

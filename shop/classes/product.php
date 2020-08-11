@@ -59,8 +59,14 @@
             }
         }
         public function show_product() {
-            // sắp xếp theo ID theo thứ tự desc (giảm dần)
-            $query = "SELECT * FROM  tbl_product order by productId desc";
+            // $query = "SELECT * FROM  tbl_product order by productId desc";
+            // bình thường thì ta sẽ sử dụng câu lệnh truy vấn trên nhưng mà bài toán đặt ra là:
+            // hiển thị catId , brandId trong bảng product khi hiển thị ra phải lấy được tên của chúng
+            // CHÚ Ý ---------------------------------------------------------------------------------
+            $query = "SELECT tbl_product.*,tbl_category.catName,tbl_brand.brandName
+            FROM tbl_product INNER JOIN tbl_category ON tbl_product.catId = tbl_category.catId 
+            INNER JOIN tbl_brand ON tbl_product.brandId = tbl_brand.brandId
+            ORDER BY tbl_product.productId desc";
             // gọi function thực hiện trong database
             $result = $this->db->select($query);
             return $result;
