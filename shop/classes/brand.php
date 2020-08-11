@@ -1,7 +1,8 @@
 <?php
     // goi den cong viec ma ham can thuc hien
-    include '../lib/database.php';
-    include '../helper/format.php';
+    include_once '../lib/database.php';
+    include_once '../helper/format.php';
+    // cần đổi thành once vì mai này khi làm file product add gọi lại sẽ bị undefid kết nối với DB
 ?>
 
 <?php

@@ -10,6 +10,12 @@
                         
                     </ul>
                 </li>
+                <li><a class="menuitem">Product Option</a>
+                    <ul class="submenu">
+                        <li><a href="productadd.php">Add Product</a> </li>
+                        <li><a href="productlist.php">Product List</a> </li>
+                    </ul>
+                </li>
 				<li><a class="menuitem">Brand of product</a>
                     <ul class="submenu">
                         <li><a href="brandadd.php">Add brand</a></li>
@@ -32,12 +38,6 @@
                     <ul class="submenu">
                         <li><a href="catadd.php">Add Category</a> </li>
                         <li><a href="catlist.php">Category List</a> </li>
-                    </ul>
-                </li>
-                <li><a class="menuitem">Product Option</a>
-                    <ul class="submenu">
-                        <li><a href="addproduct.php">Add Product</a> </li>
-                        <li><a href="productlist.php">Product List</a> </li>
                     </ul>
                 </li>
             </ul>
