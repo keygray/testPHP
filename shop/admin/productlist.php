@@ -8,6 +8,10 @@
 <?php
 	$pd = new product();
 	$fm = new Format();
+	if(isset($_GET['delId'])){
+		$id = $_GET['delId'];
+		$deleteProduct = $pd->delete_product($id);
+ 	}
 ?>
 <div class="grid_10">
     <div class="box round first grid">

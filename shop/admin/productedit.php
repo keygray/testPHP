@@ -13,12 +13,12 @@
     }
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         // kiểm tra 2 biến này bằng function trong class adminlogin
-        $updateProduct = $pd->update_category($_POST,$_FILES,$id) ;
+        $updateProduct = $pd->update_product($_POST,$_FILES,$id) ;
     }
 ?>
 <div class="grid_10">
     <div class="box round first grid">
-        <h2>Sửa New Product</h2>
+        <h2>Update New Product</h2>
         <div class="block">    
         <?php
             if(isset($updateProduct)){
@@ -159,7 +159,7 @@
 				<tr>
                     <td></td>
                     <td>
-                        <input type="submit" name="submit" Value="Save" />
+                        <input type="submit" name="submit" value="Update" />
                     </td>
                 </tr>
             </table>

@@ -77,5 +77,92 @@
             return $result;
         }
 
+
+
+        public function update_product($data,$files,$id){
+            $id = mysqli_real_escape_string($this->db->link, $id);
+            $productName = mysqli_real_escape_string($this->db->link, $data['productName']);
+            $category = mysqli_real_escape_string($this->db->link, $data['category']);
+            $brand = mysqli_real_escape_string($this->db->link, $data['brand']);
+            $product_desc = mysqli_real_escape_string($this->db->link, $data['product_desc']);
+            $price = mysqli_real_escape_string($this->db->link, $data['price']);
+            $type = mysqli_real_escape_string($this->db->link, $data['type']);
+            // CODE UPLOAD HÌNH ẢNH
+            // kiểm tra hình 
+            $permited = array('jpg','jpeg','png','gif');
+            $file_name = $_FILES['image']['name'];
+            $file_size = $_FILES['image']['size'];
+            $file_temp = $_FILES['image']['tmp_name'];
+            $div = explode('.',$file_name);
+            $file_ext = strtolower(end($div));
+            $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
+            // và cho vào folder upload từ file lấy được từ unique_image
+            $uploaded_image = "upload/".$unique_image;
+            //trong update phải kiểm tra file_name hình ảnh rỗng hay không theo kiểu khác
+            if($productName=="" || $category=="" || $brand=="" || $product_desc=="" || $price=="" || $type==""){
+                $alert = "<span class='error'>This field not be to allow empty</span>";
+                return $alert;
+            }
+            else{
+                if(!empty($file_name)){
+                    //nếu người dùng chọn ảnh mới
+                    if($file_size > 204800){
+                        $alert = "<span class='error'>Image Size should be less then 2MB!</span>";
+                        return $alert;
+                    }
+                    elseif(in_array($file_ext,$permited) === false){
+                        $alert = "<span class='error'>You can upload only:-".implode(', ', $permited)."</span>";
+                        return $alert;
+                    }
+
+                    //di chuyển ảnh mới vô thư mục upload
+                    move_uploaded_file($file_temp,$uploaded_image);
+                    //update lại hoàn toàn
+                    $query = "UPDATE tbl_product SET 
+                    productName= '$productName',
+                    catId= '$category',
+                    brandId= '$brand',
+                    product_desc= '$product_desc',
+                    price= '$price',
+                    type= '$type',
+                    image= '$unique_image'
+                    WHERE productId = '$id'";
+                }
+                else{
+                    //nếu người dùng vẫn để ảnh cũ thì cho phép up các cái còn lại trừ ảnh
+                    $query = "UPDATE tbl_product SET 
+                    productName= '$productName',
+                    catId= '$category',
+                    brandId= '$brand',
+                    product_desc= '$product_desc',
+                    price= '$price',
+                    type= '$type'
+                    WHERE productId = '$id'";
+                }
+                // ra ngoài 2 câu lệnh đều thực hiện chung phần này nên cho ra ngoài
+                $result = $this->db->update($query);
+                // nếu true insert thành công => ...
+                if($result){
+                    $alert = "<span class='success'>Update Successfull</span>";
+                    return $alert;
+                }
+                else {
+                    $alert = "<span class='error'>Update Not Successfull</span>";
+                    return $alert;
+                }
+            }
+        }
+        public function delete_product($id){
+            $query = "DELETE FROM tbl_product where productId = '$id'";
+            $result = $this->db->delete($query);
+            if($result){
+                $alert = "<span class='success'>Delete Successfull</span>";
+                return $alert;
+            }
+            else {
+                $alert = "<span class='error'>Delete Not Successfull</span>";
+                return $alert;
+            }
+        }
     }
 ?>
