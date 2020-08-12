@@ -3,12 +3,20 @@
 	include 'inc/slider.php';
 ?>
 <?php
+if(isset($_GET['delId'])){
+	$delid = $_GET['delId'];
+	$deleteCart = $ct->delete_product_cart($delid);
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 	// update số lượng sản phẩm
 	$cartId= $_POST['cartId'];
 	// tạo biến số lượng
 	$quantity = $_POST['quantity'];
 	$update_quantity_cart = $ct->update_quantity_cart($quantity,$cartId) ;
+	// giả dụ không cho số lượng min = 1 thì ta có thể xử lý âm sẽ xóa đi như sau
+	// if($quantity <= 0){
+	// 	$deleteCart = $ct->delete_product_cart($cartId);
+	// }
 }
 ?>
 		<div class="main">
@@ -19,6 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 						<?php
 						if(isset($update_quantity_cart)){
 							echo $update_quantity_cart;
+						}
+						?>
+						<?php
+						if(isset($deleteCart)){
+							echo $deleteCart;
 						}
 						?>
 						<table class="tblone">
@@ -54,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 								$total = $result['quantity'] * $result['price'];
 								echo $total;
 								?></td>
-								<td><a href="">X</a></td>
+								<td><a href="?delId=<?php echo $result['cartId'];?>">Xóa</a></td>
 							</tr>
 							<?php
 							// giá tổng tính

@@ -87,5 +87,17 @@
                 return $msg;
             }
         }
+
+        public function delete_product_cart($delid){
+            $query = "DELETE FROM tbl_cart where cartId = '$delid'";
+            $result = $this->db->delete($query);
+            if($result){
+                echo "<script type='text/javascript'>window.location.href = 'cart.php'</script>"; 
+            }
+            else {
+                $alert = "<span class='error'>Delete Not Successfull</span>";
+                return $alert;
+            }
+        }
     }
 ?>
