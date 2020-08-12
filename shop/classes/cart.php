@@ -35,19 +35,57 @@
             $image=$result['image'];
             $price=$result['price'];
             $productName=$result['productName'];
-            $query_insert = "INSERT INTO  tbl_cart(productId,quantity,sId,image,price,productName) 
-            VALUES ('$id','$quantity','$sId','$image','$price','$productName')";
-             // gọi function thực hiện trong database
-            $insert_cart = $this->db->insert($query_insert);
-             // nếu true insert thành công => ...
-            if($result){
-                //nếu thêm thành công thì nhảy sang tab giỏ hàng bên ngoài
-                header('Location:cart.php');
+
+            // // XỬ LÝ BÀI TOÁN ĐẶT RA LÀ NGƯỜI DÙNG ĐÃ ADD VÔ CART RỒI XONG LẠI ADD LẠI LẦN NỮA
+            // //HÀM KIỂM TRA TRÁNH BÀI TOÁN TRÊN
+            $checkcart = "SELECT * FROM tbl_cart WHERE productId = '$id' AND sId = '$sId'";
+            $check_cart = $this->db->select($checkcart);
+            // // nếu product id và sId bằng chính sản phâm rdoo người dùng đó thêm thì báo đã thêm
+            // // còn lại thực hiện code thêm
+            if($check_cart){
+                 $msg = "Product already added";
+                return $msg;
             }
-            else {
-                header('Location:404.php');
+            else{
+                $query_insert = "INSERT INTO  tbl_cart(productId,quantity,sId,image,price,productName) 
+                VALUES ('$id','$quantity','$sId','$image','$price','$productName')";
+                 // gọi function thực hiện trong database
+                $insert_cart = $this->db->insert($query_insert);
+                 // nếu true insert thành công => ...
+                if($result){
+                    //nếu thêm thành công thì nhảy sang tab giỏ hàng bên ngoài
+                    header('Location:cart.php');
+                }
+                else {
+                    header('Location:404.php');
+                }
             }
         }
-        
+
+        public function get_product_cart(){
+             // sắp xếp theo ID theo thứ tự desc (giảm dần)
+             $sId= session_id();
+            //  gọi ra bài toán cart là phải chung phiên làm việc session thì hiển thị ra
+             $query = "SELECT * FROM  tbl_cart WHERE sId='$sId'";
+             $result = $this->db->select($query);
+             return $result;
+        }
+        public function update_quantity_cart($quantity,$cartId){
+            $quantity = $this->fm->validation($quantity);
+            $quantity = mysqli_real_escape_string($this->db->link, $quantity);
+            $cartId = mysqli_real_escape_string($this->db->link, $cartId);
+            $query = "UPDATE tbl_cart SET 
+                    quantity= '$quantity'
+                    WHERE cartId = '$cartId'";
+            $result = $this->db->update($query);
+            if($result){
+                $msg="Add quantity done";
+                return $msg;
+            }
+            else{
+                $msg="Fail to quantity";
+                return $msg;
+            }
+        }
     }
 ?>

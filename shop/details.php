@@ -18,6 +18,7 @@
 		<div class="main">
 			<div class="content">
 				<div class="section group">
+
 				<?php
 					$get_product_details = $product->get_details($id);
 					if($get_product_details){
@@ -42,6 +43,11 @@
 									<input type="number" class="buyfield" name="quantity" value="1" min="1" />
 									<input type="submit" class="buysubmit" name="submit" value="Buy Now" />
 								</form>
+								<?php
+										if(isset($AddtoCart)){
+											echo $AddtoCart;
+										}
+								?>
 							</div>
 						</div>
 						<div class="product-desc">
