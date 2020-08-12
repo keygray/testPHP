@@ -1,6 +1,5 @@
 <?php
 	include 'inc/header.php';
-	include 'inc/slider.php';
 ?>
 <?php
 	// kiểm tra và lấy dữ liệu từ biến đã khai báo
@@ -9,7 +8,12 @@
     }
     else{
         $id = $_GET['proid'];
-    }
+	}
+	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+		// tạo biến số lượng
+		$quantity = $_POST['quantity'];
+		$AddtoCart = $ct->add_to_cart($quantity,$id) ;
+   }
 ?>
 		<div class="main">
 			<div class="content">
@@ -32,8 +36,10 @@
 								<p>Brand:<span><?php echo $result['brandName'];?></span></p>
 							</div>
 							<div class="add-cart">
-								<form action="cart.php" method="post">
-									<input type="number" class="buyfield" name="" value="1" />
+							<!-- gửi cart đến chính trang náy -->
+								<form action="" method="post">
+								<!-- nhỏ nhất = 1 để không bị âm số lượng min=1 -->
+									<input type="number" class="buyfield" name="quantity" value="1" min="1" />
 									<input type="submit" class="buysubmit" name="submit" value="Buy Now" />
 								</form>
 							</div>

@@ -3,6 +3,10 @@
 	include 'inc/slider.php';
 ?>
 <div class="main">
+	<!-- <?php
+	// session id là mỗi giao dịch thì sẽ có giá trị riêng này, như mã số token 
+		echo session_id();
+	?> -->
 	<div class="content">
 		<div class="content_top">
 			<div class="heading">
