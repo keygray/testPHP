@@ -114,8 +114,8 @@
                         <select id="select" name="type">
                             <option>Select Type</option>
                             <!-- đặt value giá trị nổi bật là 1 không nổi bật là 0 -->
-                            <option value="1">Featured</option>
-                            <option value="0">Non-Featured</option>
+                            <option value="0">Featured</option>
+                            <option value="1">Non-Featured</option>
                         </select>
                     </td>
                 </tr>

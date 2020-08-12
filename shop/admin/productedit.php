@@ -142,13 +142,13 @@
                             <?php
                                 if($result_product['type']==0){
                             ?>
-                            <option selected value="1">Featured</option>
-                            <option value="0">Non-Featured</option>
+                            <option selected value="0">Featured</option>
+                            <option value="1">Non-Featured</option>
                             <?php
                                 }else{
                             ?>
-                            <option  value="1">Featured</option>
-                            <option selected value="0">Non-Featured</option>
+                            <option  value="0">Featured</option>
+                            <option selected value="1">Non-Featured</option>
                             <?php
                                 }
                             ?>

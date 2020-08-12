@@ -1,7 +1,9 @@
 <?php
-    // goi den cong viec ma ham can thuc hien
-    include_once '../lib/database.php';
-    include_once '../helper/format.php';
+     $filepath = realpath(dirname(__FILE__));
+     // goi den cong viec ma ham can thuc hien
+     include_once ($filepath.'/../lib/database.php');
+     include_once ($filepath.'/../helper/format.php');
+     // cần đổi thành once vì mai này khi làm file product add gọi lại sẽ bị undefid kết nối với DB
 ?>
 <?php
     class product {
@@ -163,6 +165,16 @@
                 $alert = "<span class='error'>Delete Not Successfull</span>";
                 return $alert;
             }
+        }
+        //END - BACKEND
+        //-----------------------------------------------------------------------------------
+        //START WITH FE
+        //1.Hiển thị sản phẩm nổi bật
+        public function getproduct_feathered(){
+            //ta đã đặt cho 0 là favourite từ đầu
+            $query = "SELECT * FROM  tbl_product WHERE type = '0'";
+            $result = $this->db->select($query);
+            return $result;
         }
     }
 ?>
