@@ -79,8 +79,8 @@
                     WHERE cartId = '$cartId'";
             $result = $this->db->update($query);
             if($result){
-                $msg="Add quantity done";
-                return $msg;
+                // update xong trả về đúng trang này để phần giỏ hàng trên header cũng đc cập nhật
+                header('Location: cart.php');
             }
             else{
                 $msg="Fail to quantity";
@@ -98,6 +98,13 @@
                 $alert = "<span class='error'>Delete Not Successfull</span>";
                 return $alert;
             }
+        }
+        public function checkcart(){
+            //kiểm tra xem tại session đó có  hàng được thêm không
+            $sId= session_id();
+            $query = "SELECT * FROM tbl_cart WHERE sId = '$sId'";
+            $result = $this->db->select($query);
+            return $result;
         }
     }
 ?>

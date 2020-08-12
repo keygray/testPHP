@@ -1,6 +1,6 @@
 <?php
 	include 'inc/header.php';
-	include 'inc/slider.php';
+	// include 'inc/slider.php';
 ?>
 <?php
 if(isset($_GET['delId'])){
@@ -18,6 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 	// 	$deleteCart = $ct->delete_product_cart($cartId);
 	// }
 }
+?>
+<?php
+// nêu thêm sản phẩm id sẽ đc live và sẽ tự cập nhật vô giỏ hàng
+if(!isset($_GET['id'])){
+	echo "<meta http-equiv='refesh' content='0;URL=?id=live'>";
+}
+
 ?>
 		<div class="main">
 			<div class="content">
@@ -48,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 								if($get_product_cart){
 									// giá tổng
 									$subtotal=0;
+									$quantity=0;
 									while($result = $get_product_cart->fetch_assoc()){
 							?>
 							<tr>
@@ -72,16 +80,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 							<?php
 							// giá tổng tính
 							$subtotal += $total;
+							$quantity += $result['quantity'];
 								}
 							}
 							?>
 						</table>
+						<?php
+						//kiểm tra xem giỏ hàng có hàng không để tránh bị lỗi giá nếu có thì mới hiển thị giá ko thì thôi
+								$checkcart = $ct->checkcart();
+								if($checkcart){
+							?>
 						<table style="float:right;text-align:left;" width="40%">
 							<tr>
 								<th>Sub Total : </th>
 								<td>
 									<?php
+									// xử lý bài toán 
 									echo $subtotal;
+									Session::set('sum',$subtotal);
+									Session::set('quantity',$quantity);
 									?>
 								</td>
 							</tr>
@@ -100,6 +117,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 								</td>
 							</tr>
 						</table>
+						<?php
+								}else{
+									echo '<span style="color:red">empty</span>';
+								}
+						?>
 					</div>
 					<div class="shopping">
 						<div class="shopleft">
