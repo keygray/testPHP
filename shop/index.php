@@ -24,7 +24,7 @@
 			<div class="grid_1_of_4 images_1_of_4">
 				<a href="details.php"><img src="admin/upload/<?php echo $result['image'];?>" alt="" /></a>
 				<h2><?php echo $result['productName'];?></h2>
-				<p><?php echo $fm->textshorten($result['product_desc'], 50);?></p>
+				<p>h</p>
 				<p><span class="price"><?php echo $result['price']." "."VND";?></span></p>
 				<!-- lấy ra details sản phẩm cũng truyền vô id giống với edit -->
 				<div class="button"><span><a href="details.php?proid=<?php echo $result['productId'];?>" class="details">Details</a></span></div>

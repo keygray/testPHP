@@ -193,5 +193,34 @@
             $result = $this->db->select($query);
             return $result;
         }
+        //4.lấy sản phẩm mới nhất của mỗi hãng
+        public function getLastestIphone(){
+            // brandid 6 là brand id của iphone
+            $query = "SELECT * FROM  tbl_product WHERE brandId= '6' ORDER BY productId desc LIMIT 1";
+            // gọi function thực hiện trong database
+            $result = $this->db->select($query);
+            return $result;
+        }
+        public function getLastestSam(){
+            // brandid 6 là brand id của iphone
+            $query = "SELECT * FROM  tbl_product WHERE brandId= '1' ORDER BY productId desc LIMIT 1";
+            // gọi function thực hiện trong database
+            $result = $this->db->select($query);
+            return $result;
+        }
+        public function getLastestXiaomi(){
+            // brandid 6 là brand id của iphone
+            $query = "SELECT * FROM  tbl_product WHERE brandId= '7' ORDER BY productId desc LIMIT 1";
+            // gọi function thực hiện trong database
+            $result = $this->db->select($query);
+            return $result;
+        }
+        public function getLastestDell(){
+            // brandid 6 là brand id của iphone
+            $query = "SELECT * FROM  tbl_product WHERE brandId= '4' ORDER BY productId desc LIMIT 1";
+            // gọi function thực hiện trong database
+            $result = $this->db->select($query);
+            return $result;
+        }
     }
 ?>
