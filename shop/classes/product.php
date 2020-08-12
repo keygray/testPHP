@@ -176,5 +176,22 @@
             $result = $this->db->select($query);
             return $result;
         }
+        //2.Lay sp new ,giới hạn 4sp /hàng
+        public function getproduct_new(){
+            //ta đã đặt cho 0 là favourite từ đầu
+            $query = "SELECT * FROM  tbl_product ORDER BY productId desc LIMIT 4";
+            $result = $this->db->select($query);
+            return $result;
+        }
+        //3.Details sản phẩm
+        public function get_details($id){
+            $query = "SELECT tbl_product.*,tbl_category.catName,tbl_brand.brandName
+            FROM tbl_product INNER JOIN tbl_category ON tbl_product.catId = tbl_category.catId 
+            INNER JOIN tbl_brand ON tbl_product.brandId = tbl_brand.brandId
+            WHERE productId = '$id'";
+            // gọi function thực hiện trong database
+            $result = $this->db->select($query);
+            return $result;
+        }
     }
 ?>
