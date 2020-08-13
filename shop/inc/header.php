@@ -18,6 +18,7 @@
 	$us = new user();
 	$cat = new category();
 	$product = new product();
+	$cs = new customer();
 ?>
 <?php
   header("Cache-Control: no-cache, must-revalidate");
@@ -89,7 +90,25 @@
 						</a>
 					</div>
 				</div>
-				<div class="login"><a href="login.php">Login</a></div>
+				<div class="login">
+					<?php
+					if(isset($_GET['customer_id'])){
+						// xử lý việc đăng xuất ra mà vẫn còn cart
+						$delCart = $ct->del_all_cart_customer();
+						Session::destroy();
+					}
+					?>
+					<!-- nếu kiểm tra đăng nhập rồi thì hiển thị logout chưa thì login -->
+					<?php
+						$check_login = Session::get('customer_login');
+						if($check_login == false){
+							echo '<a href="login.php">Login</a></div>';
+						}
+						else {
+							// hủy phiên làm việc của người dùng đó
+							echo '<a href="?customer_id='.Session::get('customer_Id').'">Logout</a></div>';
+						}
+					?>
 				<div class="clear"></div>
 			</div>
 			<div class="clear"></div>

@@ -106,5 +106,11 @@
             $result = $this->db->select($query);
             return $result;
         }
+
+        public function del_all_cart_customer(){
+            $sId= session_id();
+            $query = "DELETE FROM tbl_cart WHERE sId = '$sId'";
+            $result = $this->db->delete($query);
+        }
     }
 ?>
