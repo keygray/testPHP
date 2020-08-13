@@ -97,5 +97,33 @@
                 return $alert;
             }
         }
+
+
+        // frontend
+        public function show_category_fe() {
+            // sắp xếp theo ID theo thứ tự desc (giảm dần)
+            $query = "SELECT * FROM  tbl_category order by catId desc";
+            // gọi function thực hiện trong database
+            $result = $this->db->select($query);
+            return $result;
+        }
+
+        public function getproductbycat($id){
+            $query = "SELECT * FROM  tbl_product WHERE catId = '$id' ORDER BY catId desc";
+            $result = $this->db->select($query);
+            return $result;
+        }
+
+        public function getcatName($id) {
+            $query = "SELECT tbl_product.*,tbl_category.catName
+            FROM tbl_product INNER JOIN tbl_category ON tbl_product.catId = tbl_category.catId 
+            WHERE tbl_product.catId = '$id' LIMIT 1";
+            // hoặc có thể sử dụng như sau
+            // cách truy vấn 2:
+            // $query = "SELECT tbl_product.*,tbl_category.catName,tbl_category.catId FROM tbl_product, tbl_category
+            // WHERE tbl_product.catId = tbl_category.catId  AND tbl_product.catID= '$id' LIMIT 1";
+            $result = $this->db->select($query);
+            return $result;
+        }
     }
 ?>
