@@ -112,5 +112,36 @@
             $query = "DELETE FROM tbl_cart WHERE sId = '$sId'";
             $result = $this->db->delete($query);
         }
+
+        
+        public function insertOrder($customer_id){
+            // layas ra được các đồ có trong giỏ hàng tại phiên làm việc đó
+            $sId = session_id();
+            $query = "SELECT * FROM tbl_cart WHERE sId = '$sId'";
+            $get_product = $this->db->select($query);
+            // ở đây càn dùng vòng vì mỗi lên thêm từ giỏ hàng vào order thì sẽ có nhiều sản phẩm cần thêm vào
+            if($get_product){
+                while($result = $get_product->fetch_assoc()){
+                    $productId = $result['productId'];
+                    $productName = $result['productName'];
+                    $quantity = $result['quantity'];
+                    // giá bằng tiền nhân số lượng
+                    $price = $result['price']*$quantity;
+                    $image = $result['image'];
+                    $customer_id = $customer_id;
+                    $query_insert = "INSERT INTO  tbl_order(productId,productName,quantity,price,image,customer_id) 
+                    VALUES ('$productId','$productName','$quantity','$price','$image','$customer_id')";
+                     // gọi function thực hiện trong database
+                    $insert_order = $this->db->insert($query_insert);
+                     // nếu true insert thành công => ...
+                }
+            }
+        }
+          // lấy tổng giá tiền tổng
+        public function get_amount_order($customer_id){
+            $query = "SELECT price FROM tbl_order WHERE customer_id = '$customer_id' AND date_order = now()";
+            $get_amount = $this->db->select($query);
+            return $get_amount;
+        }
     }
 ?>
