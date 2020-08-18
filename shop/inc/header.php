@@ -128,6 +128,16 @@
 				}
 				?>
 				<?php
+				$customer_id = Session::get('customer_Id');
+				$checkorder = $ct->checkorder($customer_id);
+				if($checkorder==true){
+					echo '<li><a href="orderdetails.php">Ordered</a></li>';
+				}
+				else {
+					echo '';
+				}
+				?>
+				<?php
 					$login_check = Session::get('customer_login');
 					if($login_check == false){
 						echo '';

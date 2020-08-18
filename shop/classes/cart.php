@@ -143,5 +143,62 @@
             $get_amount = $this->db->select($query);
             return $get_amount;
         }
+
+        //order details
+        public function get_cat_order($customer_id){
+            $query = "SELECT * FROM tbl_order WHERE customer_id = '$customer_id'";
+            $get_cat_order = $this->db->select($query);
+            return $get_cat_order;
+        }
+
+        //check order
+        public function checkorder($customer_id){
+            //kiểm tra xem tại session đó có  hàng được thêm không
+            $query = "SELECT * FROM tbl_order WHERE customer_id = '$customer_id'";
+            $result = $this->db->select($query);
+            return $result;
+        }
+
+
+        // admin inbox
+        public function get_inbox_cart(){
+            $query = "SELECT * FROM tbl_order ORDER BY date_order";
+            $result = $this->db->select($query);
+            return $result;
+        }
+
+        public function shifted($id,$time,$price){
+            $id = mysqli_real_escape_string($this->db->link,$id);
+            $time = mysqli_real_escape_string($this->db->link,$time);
+            $price = mysqli_real_escape_string($this->db->link,$price);
+            $query = "UPDATE tbl_order SET 
+            status = '1'
+            WHERE id = '$id' AND date_order='$time' AND price = '$price'";
+            $result = $this->db->update($query);
+            return $result;
+        }
+
+        public function del_order($delid,$time,$price){
+            $delid = mysqli_real_escape_string($this->db->link,$delid);
+            $time = mysqli_real_escape_string($this->db->link,$time);
+            $price = mysqli_real_escape_string($this->db->link,$price);
+            $query = "DELETE FROM tbl_order
+            WHERE id = '$delid' AND date_order='$time' AND price = '$price'";
+            $result = $this->db->delete($query);
+            return $result;
+        }
+
+        // xác nhận đã nhận hàng bên order details
+        // quy chuẩn : status 0 là chưa xử lý 1 là đang vận chuyển 2 là đã nhận
+        public function confirm_shifted($confirmId,$time,$price){
+            $confirmId = mysqli_real_escape_string($this->db->link,$confirmId);
+            $time = mysqli_real_escape_string($this->db->link,$time);
+            $price = mysqli_real_escape_string($this->db->link,$price);
+            $query = "UPDATE tbl_order SET 
+            status = '2'
+            WHERE id = '$confirmId' AND date_order='$time' AND price = '$price'";
+            $result = $this->db->update($query);
+            return $result;
+        }
     }
 ?>
