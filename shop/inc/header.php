@@ -147,6 +147,13 @@
 					}
 				?>
 				<li><a href="contact.php">Contact</a> </li>
+				<?php
+				$login_check = Session::get('customer_login');
+				if($login_check){
+					echo '<li><a href="compare.php">Compare</a> </li>';
+				}
+				?>
+				
 				<div class="clear"></div>
 			</ul>
 		</div>

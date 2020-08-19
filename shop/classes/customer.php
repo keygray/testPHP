@@ -84,7 +84,7 @@
                     Session::set('customerEmail',$value['email']);
                     // các biến trên có tác dụng sử dụng sau này như kiểu khi ddanwg nhập vào xin chào tên người đo
                     // nhập đúng hết rồi thì quay về trang chính
-                    header('Location:order.php');
+                    header('Location:cart.php');
                 }
                 else {
                     $alert = "User or Pass not match";

@@ -222,5 +222,47 @@
             $result = $this->db->select($query);
             return $result;
         }
+
+        // compare
+        public function insertCompare($productId,$customer_id){
+            $productId = mysqli_real_escape_string($this->db->link, $productId);
+            $customer_id = mysqli_real_escape_string($this->db->link, $customer_id);
+            $query = "SELECT * FROM tbl_product WHERE productId = '$productId'";
+            $result = $this->db->select($query)->fetch_assoc();
+            $image=$result['image'];
+            $price=$result['price'];
+            $productName=$result['productName'];
+            $checkcompare = "SELECT * FROM tbl_compare WHERE productId = '$productId' AND customer_id= '$customer_id'";
+            $check_compare = $this->db->select($checkcompare);
+            // // nếu product id và sId bằng chính sản phâm rdoo người dùng đó thêm thì báo đã thêm
+            // // còn lại thực hiện code thêm
+            if($check_compare){
+                 $msg = "Product already added";
+                return $msg;
+            }
+            else{
+                $query_insert = "INSERT INTO  tbl_compare(customer_id,productId,productName,price,image) 
+                VALUES ('$customer_id','$productId','$productName','$price','$image')";
+                 // gọi function thực hiện trong database
+                $insert_compare = $this->db->insert($query_insert);
+                 // nếu true insert thành công => ...
+                 if($insert_compare){
+                    $alert = "<span class='success'>Insert Successfull</span>";
+                    return $alert;
+                }
+                else {
+                    $alert = "<span class='error'>Insert Not Successfull</span>";
+                    return $alert;
+                }
+            }
+        }
+
+        public function get_compare($customer_id){
+            $customer_id = mysqli_real_escape_string($this->db->link, $customer_id);
+            $query = "SELECT * FROM  tbl_compare WHERE customer_id = '$customer_id ' ORDER BY id desc LIMIT 1";
+            // gọi function thực hiện trong database
+            $result = $this->db->select($query);
+            return $result;
+        }
     }
 ?>

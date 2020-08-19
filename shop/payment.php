@@ -6,6 +6,10 @@
 					if($login_check == false){
 						header('Location: login.php');
 					}
+					$checkcart = $ct->checkcart();
+						if($checkcart==false){
+							header('Location: cart.php');
+						}
 ?>
 		<div class="main">
 			<div class="content">

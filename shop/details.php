@@ -14,6 +14,12 @@
 		$quantity = $_POST['quantity'];
 		$AddtoCart = $ct->add_to_cart($quantity,$id) ;
    }
+   $customer_id = Session::get('customer_Id');
+   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['compare'])) {
+	// tạo biến số lượng
+	$productId = $_POST['productid'];
+	$insertCompare = $product->insertCompare($productId,$customer_id) ;
+}
 ?>
 		<div class="main">
 			<div class="content">
@@ -48,6 +54,29 @@
 											echo $AddtoCart;
 										}
 								?>
+							</div>
+							<div class="add-cart">
+										<form action="" method="POST">
+										<!-- <a href="?likelist=<?php echo $result['productId'];?>" class="buysubmit">Lưu vào danh sách iu thích</a>
+										<a href="?compare=<?php echo $result['productId'];?>" class="buysubmit">So sánh sản phẩm</a> -->
+										<input type="hidden" name="productid" value="<?php echo $result['productId'];?>">
+										<?php
+											$login_check = Session::get('customer_login');
+											if($login_check){
+												echo '<input type="submit" class="buysubmit" name="compare" value="Compare" />';
+												echo '<input type="submit" class="buysubmit" name="wishlist" value="Save to wishlist" />';
+											}
+											else {
+												echo '';
+											}
+										?>
+										<?php
+											if(isset($insertCompare)){
+												echo $insertCompare;
+											}
+										?>
+										</form>
+										
 							</div>
 						</div>
 						<div class="product-desc">
