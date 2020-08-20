@@ -196,28 +196,28 @@
         //4.lấy sản phẩm mới nhất của mỗi hãng
         public function getLastestIphone(){
             // brandid 6 là brand id của iphone
-            $query = "SELECT * FROM  tbl_product WHERE brandId= '6' ORDER BY productId desc LIMIT 1";
+            $query = "SELECT * FROM  tbl_product WHERE brandId= '8' ORDER BY productId desc LIMIT 1";
             // gọi function thực hiện trong database
             $result = $this->db->select($query);
             return $result;
         }
         public function getLastestSam(){
             // brandid 6 là brand id của iphone
-            $query = "SELECT * FROM  tbl_product WHERE brandId= '1' ORDER BY productId desc LIMIT 1";
+            $query = "SELECT * FROM  tbl_product WHERE brandId= '9' ORDER BY productId desc LIMIT 1";
             // gọi function thực hiện trong database
             $result = $this->db->select($query);
             return $result;
         }
         public function getLastestXiaomi(){
             // brandid 6 là brand id của iphone
-            $query = "SELECT * FROM  tbl_product WHERE brandId= '7' ORDER BY productId desc LIMIT 1";
+            $query = "SELECT * FROM  tbl_product WHERE brandId= '10' ORDER BY productId desc LIMIT 1";
             // gọi function thực hiện trong database
             $result = $this->db->select($query);
             return $result;
         }
         public function getLastestDell(){
             // brandid 6 là brand id của iphone
-            $query = "SELECT * FROM  tbl_product WHERE brandId= '4' ORDER BY productId desc LIMIT 1";
+            $query = "SELECT * FROM  tbl_product WHERE brandId= '11' ORDER BY productId desc LIMIT 1";
             // gọi function thực hiện trong database
             $result = $this->db->select($query);
             return $result;
@@ -259,9 +259,144 @@
 
         public function get_compare($customer_id){
             $customer_id = mysqli_real_escape_string($this->db->link, $customer_id);
-            $query = "SELECT * FROM  tbl_compare WHERE customer_id = '$customer_id ' ORDER BY id desc LIMIT 1";
+            $query = "SELECT * FROM  tbl_compare WHERE customer_id = '$customer_id ' ORDER BY id desc";
             // gọi function thực hiện trong database
             $result = $this->db->select($query);
+            return $result;
+        }
+
+        public function del_compare($id){
+            $query = "DELETE FROM tbl_compare where id = '$id'";
+            $result = $this->db->delete($query);
+            return $result;
+        }
+
+        // add slider
+        public function add_slider($data,$files){
+             // kết nối tới cơ sở dữ liệu qua biến link trong hàm database()
+            // tên biến name như nào thì viết trong data như vậy
+            $sliderName = mysqli_real_escape_string($this->db->link, $data['sliderName']);
+            $type = mysqli_real_escape_string($this->db->link, $data['type']);
+            // CODE UPLOAD HÌNH ẢNH
+            // kiểm tra hình 
+            $permited = array('jpg','jpeg','png','gif');
+            $file_name = $_FILES['image']['name'];
+            $file_size = $_FILES['image']['size'];
+            $file_temp = $_FILES['image']['tmp_name'];
+            $div = explode('.',$file_name);
+            $file_ext = strtolower(end($div));
+            $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
+            // và cho vào folder upload từ file lấy được từ unique_image
+            $uploaded_image = "upload/".$unique_image;
+            // file name tượng trưng trường hình ảnh không được rỗng 
+            if($sliderName=="" || $type=="" || $file_name==""){
+                $alert = "<span class='error'>This field not be to allow empty</span>";
+                return $alert;
+            }
+            else {
+                // lấy hình ảnh ở biến file tạm là file_temp xong nó sẽ upload vào qua uploaded
+                move_uploaded_file($file_temp,$uploaded_image);
+                // ghi câu truy vấn sql
+                $query = "INSERT INTO  tbl_slider(sliderName,type,sliderImage) VALUES ('$sliderName','$type','$unique_image')";
+                // gọi function thực hiện trong database
+                $result = $this->db->insert($query);
+                // nếu true insert thành công => ...
+                if($result){
+                    $alert = "<span class='success'>Insert Successfull</span>";
+                    return $alert;
+                }
+                else {
+                    $alert = "<span class='error'>Insert Not Successfull</span>";
+                    return $alert;
+                }
+
+            }
+        }
+        // show slider
+        public function show_slider(){
+            $query = "SELECT * FROM  tbl_slider ORDER BY sliderId desc";
+            // gọi function thực hiện trong database
+            $result = $this->db->select($query);
+            return $result;
+        }
+
+        public function del_slider($id){
+            $query = "DELETE FROM tbl_slider where sliderId = '$id'";
+            $result = $this->db->delete($query);
+            return $result;
+        }
+
+        public function get_sliderbyid($id){
+            $query = "SELECT * FROM  tbl_slider where sliderId = '$id' LIMIT 1";
+            // gọi function thực hiện trong database
+            $result = $this->db->select($query);
+            return $result;
+        }
+
+        public function update_slider($data,$files,$id){
+            $sliderName = mysqli_real_escape_string($this->db->link, $data['sliderName']);
+            $type = mysqli_real_escape_string($this->db->link, $data['type']);
+            $id = mysqli_real_escape_string($this->db->link, $id);
+            // CODE UPLOAD HÌNH ẢNH
+            // kiểm tra hình 
+            $permited = array('jpg','jpeg','png','gif');
+            $file_name = $_FILES['image']['name'];
+            $file_size = $_FILES['image']['size'];
+            $file_temp = $_FILES['image']['tmp_name'];
+            $div = explode('.',$file_name);
+            $file_ext = strtolower(end($div));
+            $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
+            // và cho vào folder upload từ file lấy được từ unique_image
+            $uploaded_image = "upload/".$unique_image;
+            //trong update phải kiểm tra file_name hình ảnh rỗng hay không theo kiểu khác
+            if($sliderName=="" || $type==""){
+                $alert = "<span class='error'>This field not be to allow empty</span>";
+                return $alert;
+            }
+            else{
+                if(!empty($file_name)){
+                    //di chuyển ảnh mới vô thư mục upload
+                    move_uploaded_file($file_temp,$uploaded_image);
+                    //update lại hoàn toàn
+                    $query = "UPDATE tbl_slider SET 
+                    sliderName= '$sliderName',
+                    sliderImage= '$unique_image',
+                    type= '$type'
+                    WHERE sliderId = '$id'";
+                }
+                else{
+                    //nếu người dùng vẫn để ảnh cũ thì cho phép up các cái còn lại trừ ảnh
+                    $query = "UPDATE tbl_slider SET 
+                    sliderName= '$sliderName',
+                    type= '$type'
+                    WHERE sliderId = '$id'";
+                }
+                // ra ngoài 2 câu lệnh đều thực hiện chung phần này nên cho ra ngoài
+                $result = $this->db->update($query);
+                // nếu true insert thành công => ...
+                if($result){
+                    $alert = "<span class='success'>Update Successfull</span>";
+                    return $alert;
+                }
+                else {
+                    $alert = "<span class='error'>Update Not Successfull</span>";
+                    return $alert;
+                }
+            }
+        }
+
+        public function show_slider_fe(){
+            $query = "SELECT * FROM  tbl_slider WHERE type = '1' ORDER BY sliderId desc";
+            // gọi function thực hiện trong database
+            $result = $this->db->select($query);
+            return $result;
+        }
+
+        // update only type 
+        public function update_type_slider($typeid,$type){
+            $type = mysqli_real_escape_string($this->db->link, $type);
+            $query = "UPDATE tbl_slider SET type='$type' WHERE sliderId='$typeid'";
+            $result = $this->db->update($query);
             return $result;
         }
     }

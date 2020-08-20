@@ -6,7 +6,7 @@
 // kiểm tra xem người dùng đăng nhập chưa
 						$check_login = Session::get('customer_login');
 						if($check_login == false){
-							header('Location: login.php');
+							echo "<script>window.location = 'login.php'</script>";
 						}
 					?>
 <?php

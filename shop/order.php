@@ -14,7 +14,7 @@
 				<div class="cartoption">
 					<div class="cartpage">
 					<div class="not_found">
-						<h3 style="text-align:center;color:red;font-size:1.4rem">Oder page</h3>
+						<h3 style="text-align:center;color:red;font-size:1.4rem">WELCOME TO KEYGRAY</h3>
 					</div>
 				</div>
 				<div class="clear"></div>

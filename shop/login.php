@@ -5,7 +5,7 @@
 // kiểm tra xem người dùng đăng nhập chưa nếu đăng nhajao rồi chuyển sang order
 						$check_login = Session::get('customer_login');
 						if($check_login){
-							header('Location: order.php');
+							echo "<script>window.location = 'order.php'</script>";
 						}
 					?>
 <?php

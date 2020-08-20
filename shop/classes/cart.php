@@ -54,7 +54,7 @@
                  // nếu true insert thành công => ...
                 if($result){
                     //nếu thêm thành công thì nhảy sang tab giỏ hàng bên ngoài
-                    header('Location:cart.php');
+                    echo "<script>window.location = 'cart.php'</script>";
                 }
                 else {
                     header('Location:404.php');
@@ -80,7 +80,7 @@
             $result = $this->db->update($query);
             if($result){
                 // update xong trả về đúng trang này để phần giỏ hàng trên header cũng đc cập nhật
-                header('Location: cart.php');
+                echo "<script>window.location = 'cart.php'</script>";
             }
             else{
                 $msg="Fail to quantity";

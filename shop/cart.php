@@ -1,31 +1,28 @@
 <?php
 	include 'inc/header.php';
-	// include 'inc/slider.php';
 ?>
 <?php
-if(isset($_GET['delId'])){
-	$delid = $_GET['delId'];
-	$deleteCart = $ct->delete_product_cart($delid);
-}
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-	// update số lượng sản phẩm
-	$cartId= $_POST['cartId'];
-	// tạo biến số lượng
-	$quantity = $_POST['quantity'];
-	$update_quantity_cart = $ct->update_quantity_cart($quantity,$cartId) ;
-	// giả dụ không cho số lượng min = 1 thì ta có thể xử lý âm sẽ xóa đi như sau
-	// if($quantity <= 0){
-	// 	$deleteCart = $ct->delete_product_cart($cartId);
-	// }
-}
-?>
-<?php
-// nêu thêm sản phẩm id sẽ đc live và sẽ tự cập nhật vô giỏ hàng
-if(!isset($_GET['id'])){
-	echo "<meta http-equiv='refesh' content='0;URL=?id=live'>";
-}
+	if(isset($_GET['delId'])){
+		$delid = $_GET['delId'];
+		$deleteCart = $ct->delete_product_cart($delid);
+	}
+	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+		// update số lượng sản phẩm
+		$cartId= $_POST['cartId'];
+		// tạo biến số lượng
+		$quantity = $_POST['quantity'];
+		$update_quantity_cart = $ct->update_quantity_cart($quantity,$cartId) ;
+		// giả dụ không cho số lượng min = 1 thì ta có thể xử lý âm sẽ xóa đi như sau
+		// if($quantity <= 0){
+		// 	$deleteCart = $ct->delete_product_cart($cartId);
+		// }
+	}
+	// nêu thêm sản phẩm id sẽ đc live và sẽ tự cập nhật vô giỏ hàng
+	if(!isset($_GET['id'])){
+		echo "<meta http-equiv='refesh' content='0;URL=?id=live'>";
+	}
 
-?>
+?> 
 		<div class="main">
 			<div class="content">
 				<div class="cartoption">
@@ -61,7 +58,7 @@ if(!isset($_GET['id'])){
 							<tr>
 								<td><?php echo $result['productName'];?></td>
 								<td><img src="admin/upload/<?php echo $result['image'];?>" alt="" /></td>
-								<td><?php echo $result['price']?></td>
+								<td><?php echo $fm->money($result['price'])?></td>
 								<td>
 									<form action="" method="post">
 									<!-- cập nhật số lượng qua cartId -->
@@ -73,7 +70,7 @@ if(!isset($_GET['id'])){
 								<td><?php 
 								// tổng giá bằng sô lượng nhân sản phẩm
 								$total = $result['quantity'] * $result['price'];
-								echo $total;
+								echo $fm->money($total);
 								?></td>
 								<td><a href="?delId=<?php echo $result['cartId'];?>">Xóa</a></td>
 							</tr>
@@ -96,7 +93,7 @@ if(!isset($_GET['id'])){
 								<td>
 									<?php
 									// xử lý bài toán 
-									echo $subtotal;
+									echo $fm->money($subtotal);
 									Session::set('sum',$subtotal);
 									Session::set('quantity',$quantity);
 									?>
@@ -112,7 +109,7 @@ if(!isset($_GET['id'])){
 								<?php
 								$vat = $subtotal * 0.1;
 								$gtotal = $subtotal + $vat;
-								echo $gtotal;
+								echo $fm->money($gtotal);
 								?>
 								</td>
 							</tr>

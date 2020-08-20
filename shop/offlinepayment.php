@@ -1,15 +1,12 @@
 <?php
 	include 'inc/header.php';
-?>
-<?php
 	// kiểm tra và lấy dữ liệu từ biến đã khai báo
 	 if(isset($_GET['order_id']) && $_GET['order_id'] == 'order'){
 		$customer_id = Session::get('customer_Id');
 		$insertOrder = $ct->insertOrder($customer_id);
-
 		// nếu mà insert thành công vô order rồi thì sẽ delete cart
 		$delCart = $ct->del_all_cart_customer();
-		header('Location: success.php');
+		echo "<script>window.location = 'success.php'</script>";
     }
 // 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 // 		// tạo biến số lượng

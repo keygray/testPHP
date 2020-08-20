@@ -1,3 +1,18 @@
+<style type="text/css">
+.flexslider .slides img {
+    width: 100%;
+    display: block;
+    max-height: 310px;
+}
+.productName{
+	font-weight: bold;
+	font-style: italic;	
+}
+.object--fit{
+	object-fit: contain;
+}
+
+</style>
 <div class="header_bottom">
 	<div class="header_bottom_left">
 		<div class="section group">
@@ -8,11 +23,11 @@
 		?>
 			<div class="listview_1_of_2 images_1_of_2">
 				<div class="listimg listimg_2_of_1">
-					<a href="details.php?proid=<?php echo $result_iphone['productId'];?>"> <img src="admin/upload/<?php echo $result_iphone['image'];?>" alt="" /></a>
+					<a href="details.php?proid=<?php echo $result_iphone['productId'];?>"> <img class="object--fit" src="admin/upload/<?php echo $result_iphone['image'];?>" alt="" /></a>
 				</div>
 				<div class="text list_2_of_1">
-					<h2>Iphone</h2>
-					<p><?php echo $result_iphone['productName'];?></p>
+					<h2>Nike</h2>
+					<p class="productName"><?php echo $result_iphone['productName'];?></p>
 					<div class="button"><span><a href="details.php?proid=<?php echo $result_iphone['productId'];?>">Add to cart</a></span></div>
 				</div>
 			</div>
@@ -27,11 +42,11 @@
 			?>
 			<div class="listview_1_of_2 images_1_of_2">
 			<div class="listimg listimg_2_of_1">
-					<a href="details.php?proid=<?php echo $result_sam['productId'];?>"> <img src="admin/upload/<?php echo $result_sam['image'];?>" alt="" /></a>
+					<a href="details.php?proid=<?php echo $result_sam['productId'];?>"> <img class="object--fit" src="admin/upload/<?php echo $result_sam['image'];?>" alt="" /></a>
 				</div>
 				<div class="text list_2_of_1">
-					<h2>Samsung</h2>
-					<p><?php echo $result_sam['productName'];?></p>
+					<h2>Bmai VN</h2>
+					<p class="productName"><?php echo $result_sam['productName'];?></p>
 					<div class="button"><span><a href="details.php?proid=<?php echo $result_sam['productId'];?>">Add to cart</a></span></div>
 				</div>
 			</div>
@@ -48,11 +63,11 @@
 		?>
 			<div class="listview_1_of_2 images_1_of_2">
 				<div class="listimg listimg_2_of_1">
-					<a href="details.php?proid=<?php echo $result_xiaomi['productId'];?>"> <img src="admin/upload/<?php echo $result_xiaomi['image'];?>" alt="" /></a>
+					<a href="details.php?proid=<?php echo $result_xiaomi['productId'];?>"> <img class="object--fit" src="admin/upload/<?php echo $result_xiaomi['image'];?>" alt="" /></a>
 				</div>
 				<div class="text list_2_of_1">
-					<h2>Xiaomi</h2>
-					<p><?php echo $result_xiaomi['productName'];?></p>
+					<h2>Converse</h2>
+					<p class="productName"><?php echo $result_xiaomi['productName'];?></p>
 					<div class="button"><span><a href="details.php?proid=<?php echo $result_xiaomi['productId'];?>">Add to cart</a></span></div>
 				</div>
 			</div>
@@ -67,11 +82,11 @@
 			?>
 			<div class="listview_1_of_2 images_1_of_2">
 			<div class="listimg listimg_2_of_1">
-					<a href="details.php?proid=<?php echo $result_dell['productId'];?>"> <img src="admin/upload/<?php echo $result_dell['image'];?>" alt="" /></a>
+					<a href="details.php?proid=<?php echo $result_dell['productId'];?>"> <img class="object--fit" src="admin/upload/<?php echo $result_dell['image'];?>" alt="" /></a>
 				</div>
 				<div class="text list_2_of_1">
-					<h2>Dell</h2>
-					<p><?php echo $result_dell['productName'];?></p>
+					<h2>Puma</h2>
+					<p class="productName"><?php echo $result_dell['productName'];?></p>
 					<div class="button"><span><a href="details.php?proid=<?php echo $result_dell['productId'];?>">Add to cart</a></span></div>
 				</div>
 			</div>
@@ -88,10 +103,18 @@
 		<section class="slider">
 			<div class="flexslider">
 				<ul class="slides">
-					<li><img src="images/1.jpg" alt="" /></li>
-					<li><img src="images/2.jpg" alt="" /></li>
-					<li><img src="images/3.jpg" alt="" /></li>
-					<li><img src="images/4.jpg" alt="" /></li>
+					<?php
+						$show_slider = $product->show_slider_fe();
+							if($show_slider){
+								while($result_slider = $show_slider->fetch_assoc()){
+						
+					?>
+					<li><img src="admin/upload/<?php echo $result_slider['sliderImage'];?>" alt="" /></li>
+					<?php
+						
+					}
+				}
+					?>
 				</ul>
 			</div>
 		</section>

@@ -38,7 +38,7 @@
 							<h2><?php echo $result['productName'];?></h2>
 							<p><?php echo  $fm->textshorten($result['product_desc'], 150);?></p>
 							<div class="price">
-								<p>Price: <span><?php echo $result['price']." "."VND";?></span></p>
+								<p>Price: <span><?php echo $fm->money($result['price'])." "."VND";?></span></p>
 								<p>Category: <span><?php echo $result['catName'];?></span></p>
 								<p>Brand:<span><?php echo $result['brandName'];?></span></p>
 							</div>
@@ -64,7 +64,6 @@
 											$login_check = Session::get('customer_login');
 											if($login_check){
 												echo '<input type="submit" class="buysubmit" name="compare" value="Compare" />';
-												echo '<input type="submit" class="buysubmit" name="wishlist" value="Save to wishlist" />';
 											}
 											else {
 												echo '';
