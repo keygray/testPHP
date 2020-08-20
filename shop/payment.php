@@ -4,11 +4,11 @@
 <?php
 					$login_check = Session::get('customer_login');
 					if($login_check == false){
-						header('Location: login.php');
+						echo "<script>window.location = 'login.php'</script>";
 					}
 					$checkcart = $ct->checkcart();
 						if($checkcart==false){
-							header('Location: cart.php');
+							echo "<script>window.location = 'cart.php'</script>";
 						}
 ?>
 		<div class="main">

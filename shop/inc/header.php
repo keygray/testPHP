@@ -127,6 +127,25 @@
 		color: var(--text-color);
 		font-weight: initial;
 	}
+	.shopping_cart span.no_product {
+		color: var(--text-color);
+		margin-left: 8px;
+	}
+	.cart {
+		background-image: linear-gradient(0, #fe6433, #f53e2d);
+		color: #666;
+	}
+	.shopping_cart span.cart_title{
+		color: #666;
+	}
+	@media only screen and (max-width: 480px){
+		.shopping_cart {
+			display: none;
+			width: 55.55%;
+			margin-left: 0px;
+			margin-top: 8px;
+		}
+	}
 	</style>
 </head>
 
@@ -146,27 +165,28 @@
 			</div>
 			<div class="header_top_right">
 				<div class="search_box">
-					<form>
-						<input type="text" value="Search for Products" onfocus="this.value = '';"
-							onblur="if (this.value == '') {this.value = 'Search for Products';}"><input type="submit"
-							value="SEARCH">
+					<form action="search.php" method="POST">
+						<input type="text" placeholder="Search products is here" name="tukhoa">
+						<input type="submit" name="search_product"value="SEARCH">
 					</form>
 				</div>
 				<div class="shopping_cart">
 					<div class="cart">
 						<a href="#" title="View my shopping cart" rel="nofollow">
-							<span class="cart_title">Cart</span>
+							<span class="cart_title">Cart :</span>
 							<span class="no_product">
 							<?php
 								$checkcart = $ct->checkcart();
 								if($checkcart){
 								$sum= Session::get("sum");
 								$quantity= Session::get("quantity");
-								echo $sum." "."vnđ"."-"."SLSP: $quantity";
+								echo $fm->money($sum)." "."vnđ";
+								// nếu muốn hiển thị số lượng thì thêm dòng này lên trên
+								// ."-"."SLSP: $quantity";
 								}
 								else
 								{
-									echo "empty";
+									echo "Empty";
 								}
 							?>
 							</span>

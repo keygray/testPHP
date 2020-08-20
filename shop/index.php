@@ -28,7 +28,7 @@
 				while($result = $product_feathered->fetch_assoc()){
 		?>
 			<div class="grid_1_of_4 images_1_of_4">
-				<a href="details.php"><img style=" height: 300px;object-fit: contain;" src="admin/upload/<?php echo $result['image'];?>" alt="" /></a>
+				<a href="details.php?proid=<?php echo $result['productId'];?>"><img style=" height: 300px;object-fit: contain;" src="admin/upload/<?php echo $result['image'];?>" alt="" /></a>
 				<h2 style=" font-weight: bold;font-style: italic;"><?php echo $result['productName'];?></h2>
 				<h4 style="font-size: 1.2rem;font-weight: 400;color: var(--text-color);line-height: 1.5rem;height: 3rem;overflow: hidden;display: block;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;" class="text_desc"><?php echo $result['product_desc'];?></h4>
 				<p><span class="price"><?php echo $fm->money($result['price'])." "."VND";?></span></p>
@@ -55,7 +55,7 @@
 				while($result_new = $product_new->fetch_assoc()){
 		?>
 			<div class="grid_1_of_4 images_1_of_4">
-			<a href="details.php"><img style=" height: 300px;object-fit: contain;" src="admin/upload/<?php echo $result_new['image'];?>" alt="" /></a>
+			<a href="details.php?proid=<?php echo $result['productId'];?>"><img style=" height: 300px;object-fit: contain;" src="admin/upload/<?php echo $result_new['image'];?>" alt="" /></a>
 				<h2 style=" font-weight: bold;font-style: italic;"><?php echo $result_new['productName'];?></h2>
 				<h4 style="font-size: 1.2rem;font-weight: 400;color: var(--text-color);line-height: 1.5rem;height: 3rem;overflow: hidden;display: block;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;" class="text_desc"><?php echo $result_new['product_desc'];?></h4>
 				<p><span class="price"><?php echo $fm->money($result_new['price'])." "."VND";?></span></p>

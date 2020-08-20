@@ -262,13 +262,11 @@ body {
   padding: 10px 15px;
   height: 36px;
   margin: 0;
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(#70389c),
-    to(#602d8d)
-  );
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      from(#70389c),
+      to(#602d8d));
   background: -moz-linear-gradient(top, #70389c, #602d8d);
   background: -o-linear-gradient(top, #70389c, #602d8d);
   background: -ms-linear-gradient(top, #70389c, #602d8d);
@@ -343,8 +341,7 @@ input[type="number"] {
 }
 
 .buysubmit {
-  background: #602d8d url("../images/large-button-overlay.png") repeat scroll 0
-    0;
+  background: #602d8d url("../images/large-button-overlay.png") repeat scroll 0 0;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   color: #fff;
@@ -365,8 +362,7 @@ input[type="number"] {
 }
 
 .login {
-  background: rgba(0, 0, 0, 0) url("../images/gradient_light-1.png") repeat-x
-    scroll 0 0;
+  background: rgba(0, 0, 0, 0) url("../images/gradient_light-1.png") repeat-x scroll 0 0;
   border: 1px solid #cecece;
   box-sizing: border-box;
   color: #444;
@@ -521,13 +517,11 @@ button.grey,
   border: 1px solid #303030;
   background: #3f4040;
   background: -moz-linear-gradient(top, #3f4040 0%, #303131 100%);
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0%, #3f4040),
-    color-stop(100%, #303131)
-  );
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      color-stop(0%, #3f4040),
+      color-stop(100%, #303131));
   background: -webkit-linear-gradient(top, #3f4040 0%, #303131 100%);
   background: -o-linear-gradient(top, #3f4040 0%, #303131 100%);
   background: -ms-linear-gradient(top, #3f4040 0%, #303131 100%);
@@ -541,13 +535,11 @@ button.grey:hover,
   border: 1px solid #303030;
   background: #525252;
   background: -moz-linear-gradient(top, #525252 0%, #454646 100%);
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0%, #525252),
-    color-stop(100%, #454646)
-  );
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      color-stop(0%, #525252),
+      color-stop(100%, #454646));
   background: -webkit-linear-gradient(top, #525252 0%, #454646 100%);
   background: -o-linear-gradient(top, #525252 0%, #454646 100%);
   background: -ms-linear-gradient(top, #525252 0%, #454646 100%);
@@ -957,7 +949,7 @@ button.grey:hover,
 }
 
 .images_1_of_4 h2 {
-  color: #b49494;
+  color: #cc3636;
   font-family: "Monda", sans-serif;
   font-size: 0.9em;
   font-weight: bold;
@@ -1058,13 +1050,11 @@ button.grey:hover,
   position: relative;
   background: #414045;
   background: -moz-linear-gradient(top, #414045 55%, #2f2e33 100%);
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(55%, #414045),
-    color-stop(100%, #2f2e33)
-  );
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      color-stop(55%, #414045),
+      color-stop(100%, #2f2e33));
   background: -webkit-linear-gradient(top, #414045 55%, #2f2e33 100%);
   background: -o-linear-gradient(top, #414045 55%, #2f2e33 100%);
   background: -ms-linear-gradient(top, #414045 55%, #2f2e33 100%);
@@ -1632,13 +1622,11 @@ button.grey:hover,
 .signup input[type="submit"]:hover {
   background: #5e5e5e;
   background: -moz-linear-gradient(top, #5e5e5e 0%, #404040 100%);
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0%, #5e5e5e),
-    color-stop(100%, #404040)
-  );
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      color-stop(0%, #5e5e5e),
+      color-stop(100%, #404040));
   background: -webkit-linear-gradient(top, #5e5e5e 0%, #404040 100%);
   background: -o-linear-gradient(top, #5e5e5e 0%, #404040 100%);
   background: -ms-linear-gradient(top, #5e5e5e 0%, #404040 100%);
@@ -2904,6 +2892,7 @@ table.tblone img {
   }
 
   .shopping_cart {
+    display: none;
     width: 55.55%;
     margin-left: 0px;
     margin-top: 8px;

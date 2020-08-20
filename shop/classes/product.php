@@ -399,5 +399,13 @@
             $result = $this->db->update($query);
             return $result;
         }
+
+        // search product
+        public function search_product($tukhoa){
+            $tukhoa = mysqli_real_escape_string($this->db->link, $tukhoa);
+            $query = "SELECT * FROM  tbl_product WHERE productName like '%$tukhoa%'";
+            $result = $this->db->select($query);
+            return $result;
+        }
     }
 ?>

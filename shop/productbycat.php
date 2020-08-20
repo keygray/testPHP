@@ -40,11 +40,11 @@
 						while($getproductbycat = $productbycat->fetch_assoc()){
 				?>
 					<div class="grid_1_of_4 images_1_of_4">
-						<a href="details-3.php"><img style=" height: 300px;object-fit: contain;" src="admin/upload/<?php echo $getproductbycat['image']?>" alt="" /></a>
+						<a href="details.php?proid=<?php echo $getproductbycat['productId'];?>"><img style=" height: 300px;object-fit: contain;" src="admin/upload/<?php echo $getproductbycat['image']?>" alt="" /></a>
 						<h2><?php echo $getproductbycat['productName']?></h2>
 						<p><?php echo $fm->textshorten($getproductbycat['product_desc'], 150);?></p>
 						<p><span class="price"><?php echo $getproductbycat['price']." "."VND";?></span></p>
-						<div class="button"><span><a href="details.php" class="details">Details</a></span></div>
+						<div class="button"><span><a href="details.php?proid=<?php echo $getproductbycat['productId'];?>" class="details">Details</a></span></div>
 					</div>
 				<?php
 					
